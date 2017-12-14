@@ -12,8 +12,7 @@ io.on('connect', socket => {
 
 })
 
-nextApp.prepare()
-.then(() => {
+nextApp.prepare().then(() => {
 
     app.get('*', (req, res) => {
         return nextHandler(req, res)
@@ -21,6 +20,6 @@ nextApp.prepare()
 
     server.listen(port, err => {
         if (err) throw err
-        console.log(`> Ready On http://localhost:${port}`)
+        console.log(`▲ Ready On http://localhost:${port}`)
     })
 })

@@ -1,5 +1,5 @@
-import Welcome from './welcome'
+import Login from './login'
 
 export default () => (
-    <Welcome/>
+    <Login/>
 )
