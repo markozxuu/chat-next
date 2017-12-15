@@ -20,7 +20,7 @@
     "prettier": "^1.8.2"
   },
   "scripts": {
-    "dev": "next",
+    "dev": "node server",
     "build": "next build",
     "start": "next start",
     "precommit": "lint-staged"
