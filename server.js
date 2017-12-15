@@ -9,7 +9,9 @@ const nextHandler = nextApp.getRequestHandler()
 const port = parseInt(process.env.PORT, 10) || 3000
 
 io.on('connect', socket => {
-
+    socket.on('username', data => {
+        io.emit('test', data)
+    })
 })
 
 nextApp.prepare().then(() => {

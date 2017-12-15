@@ -1,5 +1,5 @@
-import Chat from './chat'
+import Login from './login'
 
 export default () => (
-    <Chat/>
+    <Login/>
 )
