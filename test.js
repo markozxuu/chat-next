@@ -1,4 +1,6 @@
-const name = 'Markoz'
-const age = 18
+const name = 'Markoz';
+const age = 18;
 
-function test() {}
+function test() {
+  return 3333;
+}
