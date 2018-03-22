@@ -1,0 +1,11 @@
+[ignore]
+./*node_modules/*
+
+[libs]
+types/
+
+[version]
+0.68.0
+
+[options]
+emoji=true
