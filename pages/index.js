@@ -1,5 +1,11 @@
-import Login from './login'
+/* @flow */
+import * as React from 'react';
+import LoginContainer from '../components/login/containers/LoginContainer';
 
-export default () => (
-    <Login/>
-)
+const Index = () => (
+  <React.Fragment>
+    <LoginContainer />
+  </React.Fragment>
+);
+
+export default Index;

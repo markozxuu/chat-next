@@ -1,30 +1,11 @@
-import { Component } from 'react'
-import Head from 'next/head'
-import io from 'socket.io-client'
+import * as React from 'react';
 
-export default class extends Component {
-    constructor() {
-      super()
-
-      this.state = { usuario: '' }
-    }
-
-    componentDidMount() {
-        this.socket = io()
-        this.socket.on('test', data => {
-            this.setState({ usuario: data })
-        })
-
-    }
-
-    render() {
-        return (
-           <div>
-             <Head>
-                <title>Nextssenger</title>
-             </Head>
-             <h1>{this.state.usuario}</h1>
-           </div>
-        )
-    }
+export default class Chat extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <h1>Chat Room</h1>
+      </React.Fragment>
+    );
+  }
 }
