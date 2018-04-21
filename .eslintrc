@@ -1,32 +1,19 @@
 {
   "parserOptions": {
     "ecmaVersion": 9,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true,
-      "impliedStrict": true
-    }
+    "sourceType": "module"
   },
-  "parser": "babel-eslint",
-  "plugins": ["prettier", "react", "flowtype"],
+  "plugins": ["prettier"],
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:flowtype/recommended",
     "prettier"
   ],
   "env": {
     "node": true,
-    "es6": true,
-    "browser": true
+    "es6": true
   },
   "rules": {
     "no-shadow": "error",
-    "react/react-in-jsx-scope": "error",
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-    "react/jsx-pascal-case": "error",
-    "react/button-has-type": "error",
     "prettier/prettier": [
       "error",
       {
