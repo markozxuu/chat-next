@@ -1,0 +1,39 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "jsx": "preserve",
+        "moduleResolution": "node",
+        "pretty": true,
+        "allowJs": true,
+        "checkJs": true,
+        "allowSyntheticDefaultImports": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "baseUrl": "./",
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
+        "lib": [
+            "dom",
+            "es2015",
+            "es2016"
+        ]
+    },
+    "include": [
+        "components/**/*",
+        "lib/**/*",
+        "pages/**/*"
+    ],
+    "exclude": [
+        "server.js",
+        "next.config.js"
+    ]
+}
