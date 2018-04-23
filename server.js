@@ -1,50 +1,34 @@
-// Using console is OK :P
-/* eslint no-console: 0 */
-const app = require('express')();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+// Native
+const { parse } = require('url');
+// Packages
 const next = require('next');
+const micro = require('micro');
 
-const dev = process.env.NODE_ENV !== 'production';
-const port = process.env.PORT || 3000;
-const nextApp = next({ dev });
-const nextHandler = nextApp.getRequestHandler();
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE.ENV !== 'production';
 
-let users = {};
-let numUser = 0;
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-nextApp.prepare().then(() => {
-  io.on('connect', socket => {
-    socket.on('login', (username, ack) => {
-      if (users.hasOwnProperty(username)) {
-        ack(true);
-      } else {
-        ack(false);
-      }
-    });
-
-    socket.on('add users', username => {
-      ++numUser;
-      // we store the username in the socket session for this client
-      socket.username = username;
-      users[username] = username;
-      console.log(users);
-      console.log(numUser);
-    });
-
-    // when the user disconnects
-    socket.on('disconnecting', () => {
-      --numUser;
-      delete users[socket.username];
-    });
-  });
-
-  app.get('*', (req, res) => {
-    return nextHandler(req, res);
-  });
-
-  server.listen(port, err => {
-    if (err) throw err;
-    console.log(`▲ Ready http://localhost:${port}`);
-  });
+const server = micro(async (req, res) => {
+  const parseUrl = parse(req.url, true);
+  return handle(req, res, parseUrl);
 });
+
+async function setup(handler) {
+  await app.prepare();
+  return handler;
+}
+
+const io = require('socket.io')(server);
+// socket-io handlers are in websocket-server.js
+require('./websocket-server.js')(io);
+
+server.listen(port, err => {
+  // Using console is OK :P
+  /* eslint no-console: 0 */
+  if (err) throw err;
+  console.log(`𝚫 Ready On http://localhost:${port}`);
+});
+
+module.exports = setup(server);
