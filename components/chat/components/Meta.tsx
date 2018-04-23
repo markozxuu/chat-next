@@ -1,12 +1,12 @@
-import * as React from 'react';
 import Head from 'next/head';
+import { Fragment } from 'react';
 
 const Meta = () => (
-  <div>
+  <Fragment>
     <Head>
       <meta
         name="viewport"
-        content="width=device-width, 
+        content="width=device-width
         initial-scale=1"
       />
       <meta charSet="utf-8" />
@@ -213,7 +213,7 @@ const Meta = () => (
         margin: 0 auto;
       }
     `}</style>
-  </div>
+  </Fragment>
 );
 
 export default Meta;

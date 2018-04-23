@@ -1,12 +1,11 @@
-/* @flow */
-import * as React from 'react';
+import React, { KeyboardEvent } from 'react';
 
-type Props = {
-  handleInput: Function,
-  setRef: Function,
-  emptyMessage: boolean,
-  userExists: boolean
-};
+export interface Props {
+  setRef: (element: HTMLInputElement) => void;
+  handleInput: (event: KeyboardEvent<HTMLElement>) => void;
+  readonly emptyMessage: boolean;
+  readonly userExists: boolean;
+}
 
 const Login = ({ handleInput, setRef, emptyMessage, userExists }: Props) => {
   const messageErr = userExists ? '#ff001f' : '#fff';
@@ -18,7 +17,7 @@ const Login = ({ handleInput, setRef, emptyMessage, userExists }: Props) => {
       <style jsx>{`
         .main {
           text-align: center;
-          padding-top: 10em;
+          padding-top: 15em;
         }
         .title {
           font-weight: 200;
@@ -39,10 +38,10 @@ const Login = ({ handleInput, setRef, emptyMessage, userExists }: Props) => {
       <h1 className="title">{titleEmpy}</h1>
       <input
         className="username-input"
-        ref={setRef}
         type="text"
-        onKeyPress={handleInput}
         autoFocus
+        ref={setRef}
+        onKeyPress={handleInput}
       />
     </div>
   );

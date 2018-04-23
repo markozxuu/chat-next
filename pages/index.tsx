@@ -1,11 +1,10 @@
-/* @flow */
-import * as React from 'react';
+import { Fragment } from 'react';
 import LoginContainer from '../components/login/containers/LoginContainer';
 
 const Index = () => (
-  <React.Fragment>
+  <Fragment>
     <LoginContainer />
-  </React.Fragment>
+  </Fragment>
 );
 
 export default Index;

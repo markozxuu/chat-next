@@ -1,10 +1,9 @@
-/* @flow */
-import * as React from 'react';
+import React, { ReactNode } from 'react';
 import Meta from './Meta';
 
-type Props = {
-  children?: React.Node
-};
+export interface Props {
+  children?: ReactNode;
+}
 
 const Layout = ({ children }: Props) => (
   <div>

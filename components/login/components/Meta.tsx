@@ -1,27 +1,31 @@
-/* @flow */
-import * as React from 'react';
-import Head from 'next/head';
-import RouterEvents from '../../../lib/router-events';
-import NProgress from 'nprogress';
 import debounce from 'lodash.debounce';
+import Head from 'next/head';
+import NProgress from 'nprogress';
+import { Fragment } from 'react';
+import RouterEvents from '../../../lib/router-events';
 
+// It's okay to use a magic number for this occasion
+// tslint:disable-next-line:no-magic-numbers
 const start = debounce(NProgress.start, 200);
+
 RouterEvents.on('routeChangeStart', start);
+
 RouterEvents.on('routeChangeComplete', () => {
   start.cancel();
   NProgress.done();
 });
+
 RouterEvents.on('routeChangeError', () => {
   start.cancel();
   NProgress.done();
 });
 
 const Meta = () => (
-  <div>
+  <Fragment>
     <Head>
       <meta
         name="viewport"
-        content="width=device-width, 
+        content="width=device-width 
         initial-scale=1"
       />
       <meta charSet="utf-8" />
@@ -228,7 +232,7 @@ const Meta = () => (
         margin: 0 auto;
       }
     `}</style>
-  </div>
+  </Fragment>
 );
 
 export default Meta;
