@@ -8,11 +8,4 @@ package-lock.json
 
 # logs
 *.log
-
-# coverage
-.nyc_output
-coverage
-
-# test output
-test/**/ou
 .DS_Store

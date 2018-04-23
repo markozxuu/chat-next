@@ -1,18 +1,17 @@
-/* @flow */
-import * as React from 'react';
-import io from 'socket.io-client';
 import Router from 'next/router';
+import React, { Component, KeyboardEvent } from 'react';
+import io from 'socket.io-client';
 import Login from '../components/Login';
 import LoginLayout from '../components/LoginLayout';
 import PrettierErr from '../components/PrettierErr';
 
-type State = {
-  isExists: boolean,
-  isEmpty: boolean
-};
+export interface State {
+  isExists: boolean;
+  isEmpty: boolean;
+}
 
-export default class LoginContainer extends React.Component<{}, State> {
-  socket: Object;
+export default class LoginContainer extends Component<{}, State> {
+  socket: SocketIOClient.Socket;
   input: HTMLInputElement;
 
   state = {
@@ -45,7 +44,7 @@ export default class LoginContainer extends React.Component<{}, State> {
     });
   };
 
-  handleKeyPress = (event: SyntheticKeyboardEvent<>): void => {
+  handleKeyPress = (event: KeyboardEvent<HTMLElement>): void => {
     const user: string = this.input.value;
     if (event.key === 'Enter' && user !== '') {
       this.handleAuth(this.input.value);
@@ -60,12 +59,12 @@ export default class LoginContainer extends React.Component<{}, State> {
     this.input = element;
   };
 
-  render(): Object {
+  render() {
     return (
       <LoginLayout>
         <Login
-          handleInput={this.handleKeyPress}
           setRef={this.setRef}
+          handleInput={this.handleKeyPress}
           emptyMessage={this.state.isEmpty}
           userExists={this.state.isExists}
         />
