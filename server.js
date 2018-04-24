@@ -7,16 +7,16 @@ const micro = require('micro');
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE.ENV !== 'production';
 
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const nextApp = next({ dev });
+const nextHandle = nextApp.getRequestHandler();
 
 const server = micro(async (req, res) => {
   const parseUrl = parse(req.url, true);
-  return handle(req, res, parseUrl);
+  return nextHandle(req, res, parseUrl);
 });
 
 async function setup(handler) {
-  await app.prepare();
+  await nextApp.prepare();
   return handler;
 }
 
