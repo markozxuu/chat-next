@@ -19,8 +19,7 @@
             true,
             "array-destructuring",
             "object-destructuring",
-            "property-declaration",
-            "arrow-parameter"
+            "property-declaration"
         ],
         "interface-name": false,
         "member-access": false,

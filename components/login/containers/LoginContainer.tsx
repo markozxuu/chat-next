@@ -1,23 +1,24 @@
 import Router from 'next/router';
 import React, { Component, KeyboardEvent } from 'react';
 import io from 'socket.io-client';
+import PrettierErr from '../../errors/components/PrettierErr';
+import HandleErr from '../../errors/containers/HandleErr';
+import Layout from '../components/Layout';
 import Login from '../components/Login';
-import LoginLayout from '../components/LoginLayout';
-import PrettierErr from '../components/PrettierErr';
 
-export interface State {
-  isExists: boolean;
-  isEmpty: boolean;
-}
+const initialState = {
+  isExists: false,
+  isEmpty: false
+};
+
+// explicitly mapping our type State to readonly
+type State = Readonly<typeof initialState>;
 
 export default class LoginContainer extends Component<{}, State> {
   socket: SocketIOClient.Socket;
   input: HTMLInputElement;
 
-  state = {
-    isExists: false,
-    isEmpty: false
-  };
+  readonly state: State = initialState;
 
   // connect to WS server and listen event
   componentDidMount() {
@@ -29,14 +30,28 @@ export default class LoginContainer extends Component<{}, State> {
     this.socket.off('login', this.handleAuth);
   }
 
+  render() {
+    return (
+      <HandleErr>
+        <Layout>
+          <Login
+            setRef={this.setRef}
+            handleInput={this.handleKeyPress}
+            emptyMessage={this.state.isEmpty}
+            userExists={this.state.isExists}
+          />
+          {this.state.isExists && <PrettierErr />}
+        </Layout>
+      </HandleErr>
+    );
+  }
+
   // This method performs a check on the server,
   // to indicate if the username is available.
-  handleAuth = (username: string): void => {
+  private handleAuth = (username: string): void => {
     this.socket.emit('login', username, (ackValue: boolean) => {
       if (ackValue) {
-        this.setState({
-          isExists: true
-        });
+        this.setState(updateExists);
       } else {
         Router.push('/chat');
         this.socket.emit('add users', username);
@@ -44,32 +59,23 @@ export default class LoginContainer extends Component<{}, State> {
     });
   };
 
-  handleKeyPress = (event: KeyboardEvent<HTMLElement>): void => {
+  private handleKeyPress = (event: KeyboardEvent<HTMLElement>): void => {
     const user: string = this.input.value;
     if (event.key === 'Enter' && user !== '') {
       this.handleAuth(this.input.value);
     } else if (event.key === 'Enter' && user === '') {
-      this.setState({
-        isEmpty: true
-      });
+      this.setState(updateEmpty);
     }
   };
 
-  setRef = (element: HTMLInputElement): void => {
+  private setRef = (element: HTMLInputElement): void => {
     this.input = element;
   };
-
-  render() {
-    return (
-      <LoginLayout>
-        <Login
-          setRef={this.setRef}
-          handleInput={this.handleKeyPress}
-          emptyMessage={this.state.isEmpty}
-          userExists={this.state.isExists}
-        />
-        {this.state.isExists && <PrettierErr />}
-      </LoginLayout>
-    );
-  }
 }
+
+const updateExists = (prevState: State): object => ({
+  isExists: prevState.isExists.valueOf
+});
+const updateEmpty = (prevState: State): object => ({
+  isEmpty: prevState.isExists.valueOf
+});

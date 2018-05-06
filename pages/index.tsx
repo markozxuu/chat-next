@@ -1,10 +1,10 @@
-import { Fragment } from 'react';
+import React from 'react';
 import LoginContainer from '../components/login/containers/LoginContainer';
 
-const Index = () => (
-  <Fragment>
-    <LoginContainer />
-  </Fragment>
-);
-
-export default Index;
+export default function Index() {
+  return (
+    <>
+      <LoginContainer />
+    </>
+  );
+}

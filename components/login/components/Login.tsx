@@ -1,13 +1,18 @@
-import React, { KeyboardEvent } from 'react';
+import React, { KeyboardEvent, SFC } from 'react';
 
-export interface Props {
-  setRef: (element: HTMLInputElement) => void;
-  handleInput: (event: KeyboardEvent<HTMLElement>) => void;
-  readonly emptyMessage: boolean;
+interface Props {
   readonly userExists: boolean;
+  readonly emptyMessage: boolean;
+  setRef(element: HTMLInputElement): void;
+  handleInput(event: KeyboardEvent<HTMLElement>): void;
 }
 
-const Login = ({ handleInput, setRef, emptyMessage, userExists }: Props) => {
+const Login: SFC<Props> = ({
+  handleInput,
+  setRef,
+  emptyMessage,
+  userExists
+}) => {
   const messageErr = userExists ? '#ff001f' : '#fff';
   const titleEmpy = emptyMessage
     ? 'You did not write anything🙈'
