@@ -5,6 +5,7 @@
         "module": "esnext",
         "jsx": "preserve",
         "moduleResolution": "node",
+        "importHelpers": true,
         "pretty": true,
         "allowJs": true,
         "checkJs": true,

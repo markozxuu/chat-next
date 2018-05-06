@@ -1,11 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 
-export default class Chat extends Component {
-  render() {
-    return (
-      <Fragment>
-        <h1>Chat Room</h1>
-      </Fragment>
-    );
-  }
+export default function Chat() {
+  return (
+    <>
+      <h1>Chat Room :D</h1>
+    </>
+  );
 }
